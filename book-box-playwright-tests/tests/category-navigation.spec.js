@@ -1,4 +1,4 @@
-const { test, expect, request, response } = require('@playwright/test');
+const { test, expect, request } = require('@playwright/test');
 const { Book } = require('../models/book');
 
 test.describe('NavigationMenu_Display_Success', () => {
@@ -176,7 +176,7 @@ test.describe('API_CategoryNavigation_Testing', () => {
             for (const book of books) {
                 expect(book).toBeInstanceOf(Book);
                 expect(book.isValid()).toBe(true);
-            };
+            }
         });
     });
 });
