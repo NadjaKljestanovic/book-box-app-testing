@@ -111,7 +111,7 @@ test.describe('AddBookToCart_Success', () => {
 
     test('TableSumAfterDecreasing_Count_Success', async() => {
         await expect.poll(async () => {
-            const handle = page.getByRole('table').getByText('CHF').nth(1);;
+            const handle = page.getByRole('table').getByText('CHF').nth(1);
             if (!handle) return null;
             return await handle.textContent();
         }, {
