@@ -1,7 +1,7 @@
 # book-box-app-testing
 ## About the Project
 
-This project is created for testing the **BookBox.ch** website. It uses **JavaScript** with **Playwright**.
+This project is created for testing the **BookBox.ch** website. It uses **JavaScript** with **Playwright**. Default browser **Google Chrome** is used.
 
 **Playwright** is a modern end-to-end testing framework developed by Microsoft. It was chosen because of its good integration with JavaScript, and its ability to handle modern web applications efficiently. It supports multiple browsers (Chromium, Firefox, WebKit) and allows testing with minimal configuration.
 
