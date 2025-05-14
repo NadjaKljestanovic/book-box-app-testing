@@ -109,9 +109,29 @@ test.describe('AddBookToCart_Success', () => {
         }).toBe("1");
     });
 
-    test('SumAfterDecreasing_Count_Success', async() => {
+    test('TableSumAfterDecreasing_Count_Success', async() => {
         await expect.poll(async () => {
-            const handle = page.getByText('CHF 46.50').nth(3);
+            const handle = page.getByRole('table').getByText('CHF').nth(1);;
+            if (!handle) return null;
+            return await handle.textContent();
+        }, {
+            timeout: 5000,
+        }).toBe("CHF 46.50");
+    });
+
+    test('ItemsTotalAfterDecreasing_Count_Success', async() => {
+        await expect.poll(async () => {
+            const handle = page.getByText('CHF 46.50').nth(1);
+            if (!handle) return null;
+            return await handle.textContent();
+        }, {
+            timeout: 5000,
+        }).toBe("CHF 46.50");
+    });
+
+    test('TotalAfterDecreasing_Count_Success', async() => {
+        await expect.poll(async () => {
+            const handle = page.getByText('CHF 46.50').nth(2);
             if (!handle) return null;
             return await handle.textContent();
         }, {

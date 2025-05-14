@@ -127,7 +127,7 @@ test.describe('CartScreen_ItemsAdded_Success', () => {
     });
 });
 
-test.describe('API_AddToCart_Testing', () => {
+test.describe('API_Search_And_AddToCart_Testing', () => {
     test('SearchrequestWithParameters_Status_200_Success', async () => {
         const apiContext = await request.newContext();
         const response = await apiContext.post('https://api.bookbox.ch/list', {

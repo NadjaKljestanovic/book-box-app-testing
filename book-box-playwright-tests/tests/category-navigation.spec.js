@@ -98,8 +98,9 @@ test.describe('SideMenu_Success', () => {
 
     test('SideMenuTypeOfSybcategory_Hide_Success', async ({page}) => {
         await page.locator('.mantine-1avyp1d > .mantine-UnstyledButton-root').first().click();
-
-        await expect(page.getByRole('main').getByText('Belletristik')).toBeHidden();
+        await expect.poll(async () => {
+            return page.getByRole('main').getByText('Belletristik').isHidden();
+        }).toBe(true);
     });
 
     test('SideMenuTypeOfSybcategory_Display_Success', async ({page}) => {
