@@ -59,8 +59,7 @@ test.describe('NavigationMenu_Select_Success', () => {
         await page.goto(`https://bookbox.ch/categories/${product}`);
 
         await expect.poll(async () => {
-            const titleLocator = page.getByRole('heading', { name: 'Bücher' });
-            return await titleLocator.isVisible();
+            return await page.getByRole('heading', { name: 'Bücher' }).isVisible();
         }).toBe(true);
     });
 
@@ -79,8 +78,7 @@ test.describe('NavigationMenu_Select_Success', () => {
         await page.goto(`https://bookbox.ch/categories/${product}/Belletristik`);
         
         await expect.poll(async () => {
-            const titleLocator = page.getByRole('heading', { name: 'Belletristik' });
-            return await titleLocator.isVisible();
+            return await page.getByRole('heading', { name: 'Belletristik' }).isVisible();
         }).toBe(true);
     });
 });
@@ -130,7 +128,7 @@ test.describe('SideMenu_Success', () => {
 });
 
 test.describe('API_CategoryNavigation_Testing', () => {
-    //parameters for the rest of categories should be added
+    //rest of the categories should be added
     const categories = [90, 100, 110, 120];
 
     categories.forEach((categoryId) => {
@@ -154,7 +152,7 @@ test.describe('API_CategoryNavigation_Testing', () => {
     });
 
     categories.forEach((categoryId) => {
-        test.only(`API_GetBooksByCategory${categoryId}_Response_BookArray_Success`, async () => {
+        test(`API_GetBooksByCategory${categoryId}_Response_BookArray_Success`, async () => {
             const apiContext = await request.newContext();
             const response = await apiContext.post(`https://api.bookbox.ch/category/${categoryId}`, {
                 data: {
@@ -176,6 +174,43 @@ test.describe('API_CategoryNavigation_Testing', () => {
             for (const book of books) {
                 expect(book).toBeInstanceOf(Book);
                 expect(book.isValid()).toBe(true);
+            }
+        });
+    });
+});
+
+test.describe('NumberOfSelectedBooks_Success', () => {
+    //rest of the categories should be added
+    const categoryIds = [90, 100, 310];
+    const categoryNames = ['Bücher', 'Bücher/Belletristik', 'Bücher/Reiseführer'];
+
+    categoryIds.forEach((categoryId, index) => {
+        test(`NumberOfBooksInCategory${categoryId}_EqualToDataLenght_Sucess`, async({page}) => {
+            const apiContext = await request.newContext();
+            const response = await apiContext.post(`https://api.bookbox.ch/category/${categoryId}`, {
+                data: {
+                    orderBy: { key: '', type: '' },
+                    limit: 1001,
+                    offset: 1,
+                    page: 1,
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const body = await response.json();
+            const numberOfBooks = body.data.length;
+
+            await page.goto(`https://bookbox.ch/categories/${categoryNames[index]}`);
+            const shownNumberText = page.locator('text=/\\d+\\+? Produkte sind gelistet/');
+            await expect(shownNumberText).toBeVisible({ timeout: 5000 });
+            const text = await shownNumberText.textContent();
+            const shownNumber = parseInt(text.match(/\d+/)[0]);
+
+            if(numberOfBooks > 1000) {
+                expect(shownNumber).toEqual(1000);
+            } else {
+                expect(shownNumber).toEqual(numberOfBooks);
             }
         });
     });
