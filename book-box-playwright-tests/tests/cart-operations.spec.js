@@ -34,7 +34,7 @@ test.describe('AddBookToCart_Success', () => {
             return await handle.textContent();
         }, {
             timeout: 5000,
-        }).toContain("CHF 46.50");
+        }).toBe("CHF 46.50");
     });
 
     test('ItemsTotalAfterRemoving_Count_Success', async() => {
@@ -44,7 +44,7 @@ test.describe('AddBookToCart_Success', () => {
             return await handle.textContent();
         }, {
             timeout: 5000,
-        }).toContain("CHF 46.50");
+        }).toBe("CHF 46.50");
     });
 
     test('TotalAfterRemoving_Count_Success', async() => {
@@ -54,7 +54,7 @@ test.describe('AddBookToCart_Success', () => {
             return await handle.textContent();
         }, {
             timeout: 5000,
-        }).toContain("CHF 46.50");
+        }).toBe("CHF 46.50");
     });
 
     test('BookNumberAfterIncreasing_Count_Success', async() => {
@@ -65,7 +65,7 @@ test.describe('AddBookToCart_Success', () => {
             return await handle.textContent();
         }, {
             timeout: 5000,
-        }).toContain("2");
+        }).toBe("2");
     });
 
     test('TableSumAfterIncreasing_Count_Success', async() => {
@@ -75,7 +75,7 @@ test.describe('AddBookToCart_Success', () => {
             return await handle.textContent();
         }, {
             timeout: 5000,
-        }).toContain("CHF 93.00");
+        }).toBe("CHF 93.00");
     });
 
     test('ItemsTotalAfterIncreasing_Count_Success', async() => {
@@ -85,7 +85,7 @@ test.describe('AddBookToCart_Success', () => {
             return await handle.textContent();
         }, {
             timeout: 5000,
-        }).toContain("CHF 93.00");
+        }).toBe("CHF 93.00");
     });
 
     test('TotalAfterIncreasing_Count_Success', async() => {
@@ -95,7 +95,7 @@ test.describe('AddBookToCart_Success', () => {
             return await handle.textContent();
         }, {
             timeout: 5000,
-        }).toContain("CHF 93.00");
+        }).toBe("CHF 93.00");
     });
 
     test('BookNumberAfterDecreasing_Count_Success', async() => {
@@ -106,7 +106,7 @@ test.describe('AddBookToCart_Success', () => {
             return await handle.textContent();
         }, {
             timeout: 5000,
-        }).toContain("1");
+        }).toBe("1");
     });
 
     test('SumAfterDecreasing_Count_Success', async() => {
@@ -116,6 +116,6 @@ test.describe('AddBookToCart_Success', () => {
             return await handle.textContent();
         }, {
             timeout: 5000,
-        }).toContain("CHF 46.50");
+        }).toBe("CHF 46.50");
     });
 });
